@@ -25,7 +25,7 @@
     mvn clean package
     java -jar target/cake-manager-1.0.0.jar
 
- After then please go to the link below from your Internet browser
+ After then please go to the link below
 
     http://localhost:8282 
   
