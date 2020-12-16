@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Cake Directory</title>
+</head>
+
+<body>
+<div class="container">
+
+    <h3>Cake Directory</h3>
+    <hr>
+
+
+    <div class="float-right">
+        <form th:action="@{/logout}" method="post" class="form-horizontal">
+            <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+        </form>
+    </div>
+
+    <p class="h4 mb-4">Save Cake</p>
+
+
+    <form action="#" th:action="@{/ui/save}" th:object="${cake}" method="post">
+
+        <div class="clear">
+
+            <!-- Add a hidden field to update -->
+            <input type="hidden" th:field="*{cakeId}">
+
+            <input type="text" th:field="*{title}" class="form-control mb-4 col-4" placeholder="Title">
+
+            <input type="text" th:field="*{desc}" class="form-control mb-4 col-4" placeholder="Description">
+
+            <input type="text" th:field="*{image}" class="form-control mb-4 col-4" placeholder="Image">
+
+            <button type="submit" class="btn btn-info col-2">Save</button>
+
+        </div>
+
+    </form>
+
+    <hr>
+
+    <div style="margin-bottom: 25px">
+        <a th:href="@{/ui/list}">Back to Cakes List</a>
+    </div>
+
+</div>
+
+</body>
+
+</html>

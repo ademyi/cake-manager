@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Cake Manager</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Cake Manager</h3>
+    <hr>
+
+    <!-- Add a button -->
+    <div>
+        <div class="float-left">
+            <a th:href="@{/ui/showFormForAdd}"
+               class="btn btn-primary btn-sm mb-3">
+                Add Cake
+            </a>
+        </div>
+        <div class="float-right">
+            <form th:action="@{/logout}" method="post" class="form-horizontal">
+                <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+            </form>
+        </div>
+    </div>
+
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Image</th>
+            <div th:if="${#request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_MANAGER')}">
+                <th>Action</th>
+            </div>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="cake : ${cakes}">
+
+            <td th:text="${cake.title}"/>
+            <td th:text="${cake.desc}"/>
+            <td><img th:src="@{${cake.image}}" height="45" width="45"></td>
+            <div th:if="${#request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_MANAGER')}">
+                <td>
+                    <a th:href="@{/ui/showFormForUpdate(cakeId=${cake.cakeId})}"
+                       class="btn btn-info btn-sm">
+                        Update
+                    </a>
+
+                    <a th:href="@{/ui/delete(cakeId=${cake.cakeId})}"
+                       class="btn btn-danger btn-sm"
+                       onclick="if(!(confirm('Are you sure you want to delete this delicious cake?'))) return false;">
+                        Delete
+                    </a>
+                </td>
+            </div>
+
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <div class="float-left">
+            <a th:href="@{/ui/export}"
+               class="btn btn-primary btn-sm ui-icon-document">
+                Export to Excel
+            </a>
+        </div>
+        <div class="float-right">
+            <a th:href="@{/ui/manager-dash}"
+               class="btn btn-warning btn-sm mb-3">
+                Manager Dashboard
+            </a>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+
+
